@@ -32,7 +32,7 @@
 </table>
 
 <!-- TODO read length from constants -->
-{% if contacts|length == 10 %}
+{% if contacts|length == 5 %}
 <button class="js-htmx" type="button" hx-target=".js-contacts-table tbody" hx-swap="beforeend" hx-select="tbody > tr"
     hx-get="/contacts?page={{ page + 1 }}">
     Load More
@@ -46,7 +46,7 @@
         {% endif %}
 
         <!-- TODO read length from constants -->
-        {% if contacts|length == 10 %}
+        {% if contacts|length == 5 %}
         <a href="/contacts?page={{ page + 1 }}">Next</a>
         {% endif %}
     </span>
