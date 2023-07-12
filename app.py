@@ -21,12 +21,13 @@ def index():
 @app.get('/contacts')
 def contacts():
     search = request.args.get('q')
+    page = int(request.args.get('page', 1))
 
     if search is not None:
         contacts_list = Contact.search(search)
     else:
-        contacts_list = Contact.all()
-    return render_template('contacts/index.html', contacts=contacts_list)
+        contacts_list = Contact.all(page)
+    return render_template('contacts/index.html', contacts=contacts_list, page=page)
 
 
 @app.post('/contacts')

@@ -1,7 +1,7 @@
 import json
 
 
-PAGE_SIZE = 100
+PAGE_SIZE = 10
 
 # Mostly copied from https://github.com/bigskysoftware/contact-app/blob/master/contacts_model.py
 
