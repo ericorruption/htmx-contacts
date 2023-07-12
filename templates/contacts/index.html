@@ -31,17 +31,17 @@
         {% if contacts|length == 5 %}
         <tr>
             <td colspan="4" style="text-align: center">
-                <button type="button" hx-target="closest tr" hx-swap="outerHTML" hx-select="tbody > tr"
+                <span hx-target="closest tr" hx-trigger="revealed" hx-swap="outerHTML" hx-select="tbody > tr"
                     hx-get="/contacts?page={{ page + 1 }}">
                     Load more contacts
-                </button>
+                </span>
             </td>
         </tr>
         {% endif %}
     </tbody>
 </table>
 
-<div>
+<div class="js-no-htmx">
     <span style="float: right">
         {% if page > 1 %}
         <a href="/contacts?page={{ page - 1 }}">Previous</a>
