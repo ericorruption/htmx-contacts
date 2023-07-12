@@ -28,16 +28,18 @@
             </td>
         </tr>
         {% endfor %}
+        {% if contacts|length == 5 %}
+        <tr>
+            <td colspan="4" style="text-align: center">
+                <button type="button" hx-target="closest tr" hx-swap="outerHTML" hx-select="tbody > tr"
+                    hx-get="/contacts?page={{ page + 1 }}">
+                    Load more contacts
+                </button>
+            </td>
+        </tr>
+        {% endif %}
     </tbody>
 </table>
-
-<!-- TODO read length from constants -->
-{% if contacts|length == 5 %}
-<button class="js-htmx" type="button" hx-target=".js-contacts-table tbody" hx-swap="beforeend" hx-select="tbody > tr"
-    hx-get="/contacts?page={{ page + 1 }}">
-    Load More
-</button>
-{% endif %}
 
 <div>
     <span style="float: right">
