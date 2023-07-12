@@ -25,6 +25,8 @@ def contacts():
 
     if search is not None:
         contacts_list = Contact.search(search)
+        if request.headers.get('HX-Trigger') == 'search':
+            return render_template('contacts/_list.html', contacts=contacts_list)
     else:
         contacts_list = Contact.all(page)
     return render_template('contacts/index.html', contacts=contacts_list, page=page)

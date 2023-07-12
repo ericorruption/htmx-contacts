@@ -3,7 +3,10 @@
 {% block content %}
 <form action="/contacts" class="tool-bar">
     <label for="search">Search term</label>
-    <input id="search" name="q" type="search" value="{{ request.args.get('q') or '' }}" />
+    <input id="search" name="q" type="search" value="{{ request.args.get('q') or '' }}" hx-get="/contacts"
+        hx-trigger="change, keyup delay:300ms changed" hx-target=".js-contacts-table tbody" hx-push-url="true"
+        hx-indicator="#spinner" />
+    <img id="spinner" class="htmx-indicator" src="/static/img/spinning-circles.svg" alt="Request In Flight..." />
     <button type="submit">Search</button>
 </form>
 
@@ -17,17 +20,8 @@
         </tr>
     </thead>
     <tbody>
-        {% for contact in contacts %}
-        <tr>
-            <td>{{ contact.name }}</td>
-            <td>{{ contact.phone }}</td>
-            <td>{{ contact.email }}</td>
-            <td>
-                <a href="/contacts/{{ contact.id }}/edit">Edit</a>
-                <a href="/contacts/{{ contact.id }}">View</a>
-            </td>
-        </tr>
-        {% endfor %}
+        {% include 'contacts/_list.html' %}
+
         {% if contacts|length == 5 %}
         <tr>
             <td colspan="4" style="text-align: center">
