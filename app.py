@@ -51,6 +51,14 @@ def contacts_show(id: int = 0):
     return render_template('contacts/view.html', contact=contact)
 
 
+@app.get('/contacts/<int:id>/email')
+def contacts_email(id: int = 0):
+    contact = Contact.find(id)
+    contact.email = request.args.get('email')
+    contact.validate()
+    return contact.errors.get('email') or ''
+
+
 @app.get('/contacts/<int:id>/edit')
 def contacts_edit(id: int = 0):
     contact = Contact.find(id)
