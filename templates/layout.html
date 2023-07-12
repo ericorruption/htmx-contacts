@@ -6,9 +6,17 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Contact App</title>
     <link rel="stylesheet" href="https://the.missing.style/v0.2.0/missing.min.css">
+
+    <script src="{{ url_for('static', filename='js/libs/htmx/1.9.2/htmx.min.js') }}"></script>
+    <style>
+        .js-htmx-not-loaded .js-htmx,
+        .js-htmx-loaded .js-no-htmx {
+            display: none !important;
+        }
+    </style>
 </head>
 
-<body>
+<body class="js-htmx-not-loaded" hx-boost="true">
     <header>
         <h1>
             <all-caps>contacts.app</all-caps>
@@ -23,6 +31,14 @@
 
         {% block content %}{% endblock %}
     </main>
+
+    <!-- TODO what to do to prevent this script from being reinjected? -->
+    <script>
+        if (htmx) {
+            document.body.classList.remove('js-htmx-not-loaded');
+            document.body.classList.add('js-htmx-loaded');
+        }
+    </script>
 </body>
 
 </html>

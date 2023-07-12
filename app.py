@@ -10,6 +10,8 @@ app = Flask(__name__)
 # Needed for e.g. flash messages
 app.secret_key = os.getenv('SECRET_KEY')
 
+Contact.load_db()
+
 
 @app.get('/')
 def index():
@@ -69,9 +71,10 @@ def contacts_update(id: int = 0):
         return render_template('contacts/edit.html', contact=contact)
 
 
+@app.delete('/contacts/<int:id>')
 @app.post('/contacts/<int:id>/delete')
 def contacts_delete(id: int = 0):
     contact = Contact.find(id)
     contact.delete()
     flash('Contact deleted successfully.')
-    return redirect('/contacts')
+    return redirect('/contacts', code=303)
