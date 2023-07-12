@@ -7,7 +7,7 @@
     <button type="submit">Search</button>
 </form>
 
-<table>
+<table class="js-contacts-table">
     <thead>
         <tr>
             <th>Name</th>
@@ -31,12 +31,21 @@
     </tbody>
 </table>
 
+<!-- TODO read length from constants -->
+{% if contacts|length == 10 %}
+<button class="js-htmx" type="button" hx-target=".js-contacts-table tbody" hx-swap="beforeend" hx-select="tbody > tr"
+    hx-get="/contacts?page={{ page + 1 }}">
+    Load More
+</button>
+{% endif %}
+
 <div>
     <span style="float: right">
         {% if page > 1 %}
         <a href="/contacts?page={{ page - 1 }}">Previous</a>
         {% endif %}
 
+        <!-- TODO read length from constants -->
         {% if contacts|length == 10 %}
         <a href="/contacts?page={{ page + 1 }}">Next</a>
         {% endif %}
