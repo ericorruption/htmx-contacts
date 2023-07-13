@@ -72,6 +72,13 @@ def create_contacts_archive():
     return render_template('archive.html', archiver=archiver)
 
 
+@app.delete('/contacts/archive')
+def delete_contacts_archive():
+    archiver = Archiver.get()
+    archiver.reset()
+    return render_template('archive.html', archiver=archiver)
+
+
 @app.get('/contacts/archive/file')
 def download_contacts_archive():
     archiver = Archiver.get()
