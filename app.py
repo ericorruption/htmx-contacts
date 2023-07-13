@@ -22,7 +22,6 @@ def index():
 def contacts():
     search = request.args.get('q')
     page = int(request.args.get('page', 1))
-    count = Contact.count()
 
     if search is not None:
         contacts_list = Contact.search(search)
@@ -30,7 +29,7 @@ def contacts():
             return render_template('contacts/_list.html', contacts=contacts_list)
     else:
         contacts_list = Contact.all(page)
-    return render_template('contacts/index.html', contacts=contacts_list, page=page, count=count)
+    return render_template('contacts/index.html', contacts=contacts_list, page=page)
 
 
 @app.post('/contacts')
@@ -42,6 +41,11 @@ def contacts_create():
         return redirect('/contacts')
     else:
         return render_template('contacts/new.html', contact=contact)
+
+
+@app.get('/contacts/count')
+def contacts_count():
+    return "(" + str(Contact.count()) + " total contacts)"
 
 
 @app.get('/contacts/new')

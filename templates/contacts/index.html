@@ -50,6 +50,9 @@
 </div>
 
 <p>
-    <a href="/contacts/new">Add Contact</a> <span>({{ count }} total Contacts)</span>
+    <a href="/contacts/new">Add Contact</a>
+    <span class="js-htmx" hx-get="/contacts/count" hx-trigger="revealed">
+        <img id="spinner" class="htmx-indicator" src="/static/img/spinning-circles.svg" alt="" />
+    </span>
 </p>
 {% endblock %}
