@@ -6,7 +6,8 @@
     <input id="search" name="q" type="search" value="{{ request.args.get('q') or '' }}" hx-get="/contacts"
         hx-trigger="change, keyup delay:300ms changed" hx-target=".js-contacts-table tbody" hx-push-url="true"
         hx-indicator="#spinner" />
-    <img id="spinner" class="htmx-indicator" src="/static/img/spinning-circles.svg" alt="Request In Flight..." />
+    <img style="height: 20px" id="spinner" class="js-htmx htmx-indicator" src="/static/img/spinning-circles.svg"
+        alt="Request In Flight..." />
     <button type="submit">Search</button>
 </form>
 
@@ -23,11 +24,11 @@
         {% include 'contacts/_list.html' %}
 
         {% if contacts|length == 5 %}
-        <tr>
+        <tr class="js-htmx">
             <td colspan="4" style="text-align: center">
                 <span hx-target="closest tr" hx-trigger="revealed" hx-swap="outerHTML" hx-select="tbody > tr"
                     hx-get="/contacts?page={{ page + 1 }}">
-                    Load more contacts
+                    Loading...
                 </span>
             </td>
         </tr>
