@@ -7,7 +7,8 @@
         <a href="/contacts/{{ contact.id }}/edit">Edit</a>
         <a href="/contacts/{{ contact.id }}">View</a>
         <button class="js-htmx" type="button" hx-delete="/contacts/{{ contact.id}}"
-            hx-confirm="Are you sure you want to delete this contact?" hx-target="closest tr" hx-swap="delete">
+            hx-confirm="Are you sure you want to delete this contact?" hx-target="closest tr"
+            hx-swap="delete swap:0.3s">
             Delete Contact
         </button>
     </td>
