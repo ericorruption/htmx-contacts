@@ -43,6 +43,17 @@ def contacts_create():
         return render_template('contacts/new.html', contact=contact)
 
 
+@app.post('/contacts/delete')
+@app.delete('/contacts')
+def contacts_delete_all():
+    contact_ids = list(map(int, request.form.getlist("contact-ids[]")))
+    for id in contact_ids:
+        contact = Contact.find(id)
+        contact.delete()
+    flash('Contacts deleted successfully.')
+    return redirect('/contacts', code=303)
+
+
 @app.get('/contacts/count')
 def contacts_count():
     return "(" + str(Contact.count()) + " total contacts)"
