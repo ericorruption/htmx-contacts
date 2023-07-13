@@ -1,6 +1,9 @@
 {% extends 'layout.html' %}
 
 {% block content %}
+
+{% include 'archive.html' %}
+
 <form action="/contacts" class="tool-bar">
     <label for="search">Search term</label>
     <input id="search" name="q" type="search" value="{{ request.args.get('q') or '' }}" hx-get="/contacts"

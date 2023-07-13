@@ -1,9 +1,10 @@
 # TODO autopep8
 import os
 
-from flask import Flask, redirect, request, render_template, flash
+from flask import Flask, redirect, request, render_template, flash, send_file
 
 from models.contact import Contact  # TODO learn what WSGI is
+from lib.archiver import Archiver
 
 app = Flask(__name__)
 
@@ -29,7 +30,7 @@ def contacts():
             return render_template('contacts/_list.html', contacts=contacts_list)
     else:
         contacts_list = Contact.all(page)
-    return render_template('contacts/index.html', contacts=contacts_list, page=page)
+    return render_template('contacts/index.html', contacts=contacts_list, page=page, archiver=Archiver.get())
 
 
 @app.post('/contacts')
@@ -57,6 +58,24 @@ def contacts_delete_all():
 @app.get('/contacts/count')
 def contacts_count():
     return "(" + str(Contact.count()) + " total contacts)"
+
+
+@app.get('/contacts/archive')
+def contacts_archive():
+    return render_template('archive.html', archiver=Archiver.get())
+
+
+@app.post('/contacts/archive')
+def create_contacts_archive():
+    archiver = Archiver.get()
+    archiver.run()
+    return render_template('archive.html', archiver=archiver)
+
+
+@app.get('/contacts/archive/file')
+def download_contacts_archive():
+    archiver = Archiver.get()
+    return send_file(archiver.archive_file(), 'archive.json', as_attachment=True)
 
 
 @app.get('/contacts/new')
