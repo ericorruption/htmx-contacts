@@ -6,6 +6,10 @@
     <td>
         <a href="/contacts/{{ contact.id }}/edit">Edit</a>
         <a href="/contacts/{{ contact.id }}">View</a>
+        <button class="js-htmx" type="button" hx-delete="/contacts/{{ contact.id}}"
+            hx-confirm="Are you sure you want to delete this contact?" hx-target="closest tr" hx-swap="outerHTML">
+            Delete Contact
+        </button>
     </td>
 </tr>
 {% endfor %}

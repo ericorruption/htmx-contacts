@@ -92,5 +92,10 @@ def contacts_update(id: int = 0):
 def contacts_delete(id: int = 0):
     contact = Contact.find(id)
     contact.delete()
-    flash('Contact deleted successfully.')
-    return redirect('/contacts', code=303)
+
+    if request.headers.get('HX-Trigger') == 'delete-contact-btn':
+        flash('Contact deleted successfully.')
+        return redirect('/contacts', code=303)
+    else:
+        # Deleting from the contact list
+        return ""
