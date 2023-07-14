@@ -8,7 +8,7 @@
     <label for="search">Search term</label>
     <input id="search" name="q" type="search" value="{{ request.args.get('q') or '' }}" hx-get="/contacts"
         hx-trigger="change, keyup delay:300ms changed" hx-target=".js-contacts-table tbody" hx-push-url="true"
-        hx-indicator="#spinner" />
+        hx-indicator="#spinner" _="on keydown[altKey and code is 'KeyS'] from the window me.focus()" />
     <img style="height: 20px" id="spinner" class="js-htmx htmx-indicator" src="/static/img/spinning-circles.svg"
         alt="Request In Flight..." />
     <button type="submit">Search</button>
