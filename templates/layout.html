@@ -9,15 +9,17 @@
     <script src="https://unpkg.com/hyperscript.org@0.9.9"></script>
     <script src="{{ url_for('static', filename='js/libs/htmx/1.9.2/htmx.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/rsjs-menu.js') }}" type="module"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.12.3/dist/cdn.min.js"></script>
     <style>
         .js-htmx-not-loaded .js-htmx,
-        .js-htmx-loaded .js-no-htmx {
+        .js-htmx-loaded .js-no-htmx,
+        .js-alpine-loaded .js-no-alpine {
             display: none !important;
         }
     </style>
 </head>
 
-<body class="js-htmx-not-loaded" hx-boost="true">
+<body class="js-htmx-not-loaded js-alpine-not-loaded" hx-boost="true">
     <header>
         <h1>
             <all-caps>contacts.app</all-caps>
@@ -39,6 +41,11 @@
             document.body.classList.remove('js-htmx-not-loaded');
             document.body.classList.add('js-htmx-loaded');
         }
+
+        document.addEventListener('alpine:init', () => {
+            document.body.classList.remove('js-alpine-not-loaded');
+            document.body.classList.add('js-alpine-loaded');
+        });
     </script>
 </body>
 
