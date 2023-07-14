@@ -1,3 +1,11 @@
+# Hypermedia.systems contacts app
+
+## Dependencies
+
+- [python 3.9+](https://www.python.org/downloads/)
+
+## Installing
+
 Create a virtual env:
 
 ```bash
@@ -16,6 +24,8 @@ Install dependencies:
 # After activating virtual env
 pip install -r requirements.txt
 ```
+
+## Running
 
 Running the flask app locally:
 
@@ -36,4 +46,4 @@ pip freeze > requirements.txt
 
 ## Roadmap
 
-[] Custom confirmation dialogs / modals
+[ ] Custom confirmation dialogs / modals
