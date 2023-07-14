@@ -21,8 +21,10 @@
     }
 </style>
 
-<form action="/contacts/delete" method="post">
-    <table class="js-contacts-table">
+<form action="/contacts/delete" method="post" hx-delete="/contacts"
+    hx-confirm="Are you sure you want to delete these contacts?" hx-target="body">
+    <!-- hx-confirm from form should not propagate to children -->
+    <table class="js-contacts-table" hx-confirm="unset">
         <thead>
             <tr>
                 <th></th>
@@ -48,11 +50,7 @@
         </tbody>
     </table>
 
-    <button class="js-no-htmx" type="submit">Delete selected contacts</button>
-    <button class="js-htmx" type="button" hx-delete="/contacts"
-        hx-confirm="Are you sure you want to delete these contacts?" hx-target="body">
-        Delete selected contacts
-    </button>
+    <button type="submit">Delete selected contacts</button>
 </form>
 
 <div class="js-no-htmx">
