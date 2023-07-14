@@ -5,13 +5,15 @@ from flask import Flask, redirect, request, render_template, flash, send_file
 
 from models.contact import Contact  # TODO learn what WSGI is
 from lib.archiver import Archiver
+from api.v1 import api_v1
+
+Contact.load_db()
 
 app = Flask(__name__)
+app.register_blueprint(api_v1, url_prefix='/api/v1')
 
 # Needed for e.g. flash messages
 app.secret_key = os.getenv('SECRET_KEY')
-
-Contact.load_db()
 
 
 @app.get('/')

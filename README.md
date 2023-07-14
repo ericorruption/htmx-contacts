@@ -33,3 +33,7 @@ Don't forget to re-generate requirements.txt after installing new dependencies:
 ```bash
 pip freeze > requirements.txt
 ```
+
+## Roadmap
+
+[] Custom confirmation dialogs / modals
